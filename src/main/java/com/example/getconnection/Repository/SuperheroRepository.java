@@ -26,7 +26,6 @@ public class SuperheroRepository {
     // 1. En superhelt med et bestemt heroName eller en liste med alle superhelte, der indeholder: heroName, realName og creationYear
     public List<Superhero> getSuperhero() {
         List<Superhero> superheroes = new ArrayList<>();
-        //TODO En metode, der udskriv produktnavn på et bestemt produktnummer. Produktnummer angives som parameter (tabellen PARTS).
         try (Connection con = DriverManager.getConnection(url, uid, pwd)) {
             String SQL = "SELECT * FROM superhero";
             Statement stmt = con.createStatement();
@@ -107,26 +106,26 @@ public class SuperheroRepository {
 
     // 4. En superhelt med et bestemt heroName eller en liste med alle superhelte, der indeholder: heroName og by (City)
     public List<CityWithHeroes> findSuperheroesInCity(String id) {
-            List<CityWithHeroes> cityWithHeroesList = new ArrayList<>();
-            String sql = "SELECT hero_name, real_name, city.city FROM superhero JOIN city ON superhero.city_id = city.city_id WHERE superhero.superhero_id = ?";
+        List<CityWithHeroes> cityWithHeroesList = new ArrayList<>();
+        String sql = "SELECT hero_name, real_name, city.city FROM superhero JOIN city ON superhero.city_id = city.city_id WHERE superhero.superhero_id = ?";
 
-            try (Connection con = DriverManager.getConnection(url, uid, pwd);
-                 PreparedStatement stmt = con.prepareStatement(sql)) {
-                stmt.setInt(1, Integer.parseInt(id));
-                ResultSet rs = stmt.executeQuery();
+        try (Connection con = DriverManager.getConnection(url, uid, pwd);
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, Integer.parseInt(id));
+            ResultSet rs = stmt.executeQuery();
 
-                while (rs.next()) {
-                    String heroName = rs.getString("hero_name");
-                    String realName = rs.getString("real_name");
-                    String cityName = rs.getString("city");
-                    CityWithHeroes cityWithHeroes = new CityWithHeroes(cityName, new ArrayList<>(Set.of(heroName, realName)));
-                    cityWithHeroesList.add(cityWithHeroes);
-                }
-
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+            while (rs.next()) {
+                String heroName = rs.getString("hero_name");
+                String realName = rs.getString("real_name");
+                String cityName = rs.getString("city");
+                CityWithHeroes cityWithHeroes = new CityWithHeroes(cityName, new ArrayList<>(Set.of(heroName, realName)));
+                cityWithHeroesList.add(cityWithHeroes);
             }
 
-            return cityWithHeroesList;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
+
+        return cityWithHeroesList;
     }
+}

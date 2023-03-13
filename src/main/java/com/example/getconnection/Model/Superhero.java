@@ -21,7 +21,6 @@ public class Superhero {
     }
 
 
-
     public Superhero(String heroName, String realName, String creation_year) {
         this.hero_Name = heroName;
         this.real_Name = realName;
@@ -38,8 +37,9 @@ public class Superhero {
         this.hero_Name = heroName;
     }
 
-
-
+    public int getId() {
+        return id;
+    }
 
     public String getHero_Name() {
         return hero_Name;
@@ -55,6 +55,10 @@ public class Superhero {
 
     public void setReal_Name(String real_Name) {
         this.real_Name = real_Name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCreation_year() {
