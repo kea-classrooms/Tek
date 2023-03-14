@@ -21,13 +21,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/superheroes")
 public class SuperheroController { //TODO finde ud af hvorfor den viser fejl, når jeg har min getBean metode..
-    private SuperheroRepository superheroRepository;
     private SuperheroService superheroService;
     private IRepository repository;
 
-   /* public SuperheroController(ApplicationContext context, @Value("${superherosql.impl}") String impl) {
+   public SuperheroController(ApplicationContext context, @Value("superherodatabase") String impl) {
         repository = (IRepository) context.getBean(impl);
-    }*/
+    }
 
     public SuperheroController(SuperheroService superheroService, IRepository repository){
         this.superheroService = superheroService;

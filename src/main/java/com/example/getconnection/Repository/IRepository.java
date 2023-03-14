@@ -9,9 +9,13 @@ import java.util.List;
 
 public interface IRepository {
 
-    public Superhero getSuperheroById(int id);
-    public void addSuperhero(Superhero superhero);
-    public void updateSuperhero(Superhero superhero);
-    public void deleteSuperhero(int id);
-    public List<Superhero> getAllSuperheroes();
+    Superhero getSuperheroById(int id);
+
+    void addSuperhero(Superhero superhero);
+
+    void updateSuperhero(Superhero superhero);
+
+    void deleteSuperhero(int id);
+
+    List<Superhero> getAllSuperheroes();
 }
