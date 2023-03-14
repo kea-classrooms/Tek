@@ -25,7 +25,7 @@ public class SuperheroController { //TODO finde ud af hvorfor den viser fejl, n√
     private SuperheroService superheroService;
     private IRepository repository;
 
-   /* public SuperheroController(ApplicationContext context, @Value("${superhero.repository.impl}") String impl) {
+   /* public SuperheroController(ApplicationContext context, @Value("${superherosql.impl}") String impl) {
         repository = (IRepository) context.getBean(impl);
     }*/
 
