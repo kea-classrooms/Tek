@@ -1,0 +1,26 @@
+name: Execute SQL Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/sql/*.sql'
+
+jobs:
+  execute-sql:
+    runs-on: ubuntu-latest
+
+    env:
+      MYSQL_SERVER_NAME: your-mysql-server-name.mysql.database.azure.com
+      MYSQL_DATABASE_NAME: your-mysql-database-name
+      MYSQL_USERNAME: ${{ secrets.MYSQL_USERNAME }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+
+    steps:
+      - name: Execute SQL Files against Azure Database for MySQL
+        run: |
+          for file in ${GITHUB_WORKSPACE}/src/sql/*.sql; do
+            mysql -h $MYSQL_SERVER_NAME -u $MYSQL_USERNAME -p$MYSQL_PASSWORD $MYSQL_DATABASE_NAME < $file
+          done      
+      
